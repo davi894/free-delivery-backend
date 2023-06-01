@@ -3,11 +3,7 @@ import { randomUUID } from 'crypto';
 import { IsEmail } from 'class-validator';
 import * as byCrypt from 'bcrypt';
 import { FeedBack } from './feedback.entity';
-
-enum UserRole {
-  CONTRACTOR = 'contractor',
-  COURIER = 'courier',
-}
+import { Address } from './address.entity';
 
 @ObjectType()
 export class User {
@@ -24,22 +20,34 @@ export class User {
   @IsEmail()
   email: string;
 
-  @Field(() => UserRole)
-  role: UserRole;
+  @Field(() => Boolean)
+  contractor: boolean;
+
+  @Field(() => Boolean)
+  courier: boolean;
 
   @Field(() => [FeedBack], { nullable: true })
   feedback: FeedBack[];
+
+  @Field(() => [Address], { nullable: true })
+  address: Address[];
 
   constructor(
     username: string,
     password: string,
     email: string,
-    role: UserRole,
+    feedback: FeedBack[],
+    courier: boolean,
+    contractor: boolean,
+    address: Address[],
   ) {
     this.id = randomUUID();
     this.username = username;
     this.email = email;
-    this.role = role;
+    this.contractor = contractor;
+    this.courier = courier;
+    this.feedback = feedback;
+    this.address = address;
 
     if (!this.isPasswordHashed(password)) {
       this.setPassword(password);

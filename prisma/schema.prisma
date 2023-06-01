@@ -9,3 +9,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Items {
+  id        String   @id @default(uuid())
+  item      String
+}
+
+model Address {
+  street       String
+  number       String
+  complement   String?
+  neighborhood String
+  city         String
+  state        String
+  postalCode   String
+  country      String
+}
+
+model FeedBack {
+  id      String   @id @default(uuid())
+  comment String
+  sender  User
+  receiver String
+}
+
+model Order {
+  id         String    @id @default(uuid())
+  contractor User
+  courier    User
+  items      Items[]
+  address    Address
+}
+
+model User {
+  id         String   @id @default(uuid())
+  username   String
+  password   String
+  email      String   @unique
+  contractor Boolean
+  courier    Boolean
+  feedback   FeedBack[]
+  address    Address[]
+}

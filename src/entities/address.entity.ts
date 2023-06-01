@@ -1,0 +1,28 @@
+import { ObjectType, Field } from '@nestjs/graphql';
+
+@ObjectType()
+export class Address {
+  @Feld(() => String)
+  street: string;
+
+  @Field(() => String)
+  number: string;
+i
+  @Field(() => String, { nullable: true })
+  complement?: string;
+
+  @Field(() => String)
+  neighborhood: string;
+
+  @Field(() => String)
+  city: string;
+
+  @Field(() => String)
+  state: string;
+
+  @Field(() => String)
+  postalCode: string;
+
+  @Field(() => String)
+  country: string;
+}
