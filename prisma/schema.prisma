@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,44 +7,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id                  String   @id @default(uuid())
+  username            String
+  password            String
+  email               String   @unique
+  contractor          Boolean
+  courier             Boolean
+  feedback            FeedBack[]
+  address             Address[]
+  ordersAsContractor  Order[]  @relation("Contractor")
+  ordersAsCourier     Order[]  @relation("Courier")
+}
+
 model Items {
-  id        String   @id @default(uuid())
-  item      String
+  id       String  @id @default(uuid())
+  item     String
+  orderId  String
+  order    Order   @relation("OrderItems", fields: [orderId], references: [id])
 }
 
 model Address {
-  street       String
-  number       String
-  complement   String?
-  neighborhood String
-  city         String
-  state        String
-  postalCode   String
-  country      String
-}
-
-model FeedBack {
-  id      String   @id @default(uuid())
-  comment String
-  sender  User
-  receiver String
+  id        String  @id @default(uuid())
+  orderId   String  @unique
+  order     Order   @relation(fields: [orderId], references: [id])
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model Order {
-  id         String    @id @default(uuid())
-  contractor User
-  courier    User
-  items      Items[]
-  address    Address
+  id          String    @id @default(uuid())
+  items       Items[]   @relation("OrderItems")
+  address     Address?
+  addressId   String?
+  contractor User?      @relation("Contractor", fields: [contractorId], references: [id])
+  contractorId String?
+  courier User?         @relation("Courier", fields: [courierId], references: [id])
+  courierId String?
 }
 
-model User {
-  id         String   @id @default(uuid())
-  username   String
-  password   String
-  email      String   @unique
-  contractor Boolean
-  courier    Boolean
-  feedback   FeedBack[]
-  address    Address[]
+model FeedBack {
+  id       String  @id @default(uuid())
+  comment  String
+  sender   User    @relation(fields: [senderId], references: [id])
+  senderId String
+  receiver String
 }

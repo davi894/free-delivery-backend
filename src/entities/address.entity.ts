@@ -2,12 +2,12 @@ import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
 export class Address {
-  @Feld(() => String)
+  @Field(() => String)
   street: string;
 
   @Field(() => String)
   number: string;
-i
+
   @Field(() => String, { nullable: true })
   complement?: string;
 
