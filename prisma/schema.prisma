@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id                  String   @id @default(uuid())
-  username            String
+  id                  String     @id @default(uuid())
+  username            String     @unique
   password            String
-  email               String   @unique
+  email               String     @unique
   contractor          Boolean
   courier             Boolean
-  feedback            FeedBack[]
+  feedbackReceiver    FeedBack[] @relation("receiverId")
+  feedbackSender      FeedBack[] @relation("senderId")
   address             Address[]
-  ordersAsContractor  Order[]  @relation("Contractor")
-  ordersAsCourier     Order[]  @relation("Courier")
+  ordersAsContractor  Order[]    @relation("Contractor")
+  ordersAsCourier     Order[]    @relation("Courier")
 }
 
 model Items {
@@ -36,20 +37,21 @@ model Address {
 }
 
 model Order {
-  id          String    @id @default(uuid())
-  items       Items[]   @relation("OrderItems")
-  address     Address?
-  addressId   String?
-  contractor User?      @relation("Contractor", fields: [contractorId], references: [id])
+  id           String    @id @default(uuid())
+  items        Items[]   @relation("OrderItems")
+  address      Address?
+  addressId    String?
+  contractor   User?      @relation("Contractor", fields: [contractorId], references: [id])
   contractorId String?
-  courier User?         @relation("Courier", fields: [courierId], references: [id])
-  courierId String?
+  courier      User?      @relation("Courier", fields: [courierId], references: [id])
+  courierId    String?
 }
 
 model FeedBack {
-  id       String  @id @default(uuid())
-  comment  String
-  sender   User    @relation(fields: [senderId], references: [id])
-  senderId String
-  receiver String
+  id         String  @id @default(uuid())
+  comment    String
+  sender     User    @relation("senderId", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User    @relation("receiverId" , fields: [receiverId], references: [id])
+  receiverId String
 }
