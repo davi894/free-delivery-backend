@@ -7,6 +7,7 @@ import {
   Param,
   Req,
   Res,
+  Query,
 } from '@nestjs/common';
 import { AppServiceUser } from '../../services/user/app.user.service';
 import { Request, Response } from 'express';
@@ -23,7 +24,12 @@ export class AppControllerUser {
   }
 
   @Get(':id')
-  async getUserController(@Param('id') id: string, @Res() res: Response) {
+  async getUserController(
+    @Query('user_info') user_info: string,
+    @Param('id') id: string,
+    @Res() res: Response,
+  ) {
+    console.log(user_info);
     const user = await this.appService.getUserService(id);
     return res.status(200).json(user);
   }
