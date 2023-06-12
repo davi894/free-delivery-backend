@@ -14,12 +14,12 @@ import { Request, Response } from 'express';
 
 @Controller('user')
 export class AppControllerUser {
-  constructor(private readonly appService: AppServiceUser) {}
+  constructor(private readonly appServiceUser: AppServiceUser) {}
 
   @Post('')
   async postUserController(@Req() req: Request, @Res() res: Response) {
     const { body } = req;
-    const newUser = await this.appService.postUserService(body);
+    const newUser = await this.appServiceUser.postUserService(body);
     return res.status(201).json(newUser);
   }
 
@@ -30,13 +30,13 @@ export class AppControllerUser {
     @Res() res: Response,
   ) {
     console.log(user_info);
-    const user = await this.appService.getUserService(id);
+    const user = await this.appServiceUser.getUserService(id);
     return res.status(200).json(user);
   }
 
   @Delete(':id')
   async deleteUserController(@Param('id') id: string, @Res() res: Response) {
-    await this.appService.deleteUserService(id);
+    await this.appServiceUser.deleteUserService(id);
     return res.status(204).send();
   }
 
@@ -47,7 +47,7 @@ export class AppControllerUser {
     @Res() res: Response,
   ) {
     const { body } = req;
-    const updatedUser = await this.appService.patchUserService(id, body);
+    const updatedUser = await this.appServiceUser.patchUserService(id, body);
     return res.status(200).json(updatedUser);
   }
 }
