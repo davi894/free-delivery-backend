@@ -34,12 +34,6 @@ export class AppControllerUser {
     return res.status(200).json(user);
   }
 
-  @Delete(':id')
-  async deleteUserController(@Param('id') id: string, @Res() res: Response) {
-    await this.appServiceUser.deleteUserService(id);
-    return res.status(204).send();
-  }
-
   @Patch(':id')
   async patchUserController(
     @Param('id') id: string,
@@ -49,5 +43,11 @@ export class AppControllerUser {
     const { body } = req;
     const updatedUser = await this.appServiceUser.patchUserService(id, body);
     return res.status(200).json(updatedUser);
+  }
+
+  @Delete(':id')
+  async deleteUserController(@Param('id') id: string, @Res() res: Response) {
+    await this.appServiceUser.deleteUserService(id);
+    return res.status(204).send();
   }
 }

@@ -1,19 +1,40 @@
-import { Controler, Post, Get, Patch, Delete, Param, Req, Res, Query } from '@nest/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Param,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AppServiceAddress } from '../../services/address/app.address.service';
 
-@Controler('address')
+@Controller('address')
 export class AppControlerAddress {
   constructor(private readonly appServiceAddress: AppServiceAddress) {}
 
   @Post('')
-  async postAddressControler() { }
+  async postAddressControler(@Req() req: Request, @Res() res: Response) {
+    return '';
+  }
 
-  @Get('')
-  async getAddressControler() { }
+  @Get(':id')
+  async getAddressControler(@Param('id') id: string, @Res() res: Response) {
+    return '';
+  }
 
-  @Patch('')
-  async patchAddressControler() {}
+  @Patch(':id')
+  async patchAddressControler(
+    @Param('id') id: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    return '';
+  }
 
-  @Delete('')
-  async deleteAddressControler() {}
+  @Delete(':id')
+  async deleteAddressControler() {
+    return '';
+  }
 }
