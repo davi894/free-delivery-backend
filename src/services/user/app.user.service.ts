@@ -24,6 +24,14 @@ export class AppServiceUser {
     id: string,
     data: Prisma.UserUpdateInput,
   ): Promise<User> {
+    if (data.password) {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(
+        data.password as string,
+        saltRounds,
+      );
+      data.password = { set: hashedPassword };
+    }
     return this.prisma.user.update({ where: { id }, data });
   }
 

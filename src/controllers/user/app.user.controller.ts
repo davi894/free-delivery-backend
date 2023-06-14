@@ -20,7 +20,8 @@ export class AppControllerUser {
   async postUserController(@Req() req: Request, @Res() res: Response) {
     const { body } = req;
     const newUser = await this.appServiceUser.postUserService(body);
-    return res.status(201).json(newUser);
+    const { password, ...userNotPassword } = newUser;
+    return res.status(201).json({ ...userNotPassword });
   }
 
   @Get(':id')
@@ -42,7 +43,8 @@ export class AppControllerUser {
   ) {
     const { body } = req;
     const updatedUser = await this.appServiceUser.patchUserService(id, body);
-    return res.status(200).json(updatedUser);
+    const { password, ...userNotPassword } = updatedUser;
+    return res.status(200).json({ ...userNotPassword });
   }
 
   @Delete(':id')
