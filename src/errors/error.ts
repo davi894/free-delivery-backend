@@ -1,8 +1,6 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
-import { AppModule } from 'src/app.module';
-import { NestFactory } from '@nestjs/core';
 
 export class Error extends HttpException {
   constructor(mensagem: string, statusCode: HttpStatus) {
@@ -23,10 +21,3 @@ export class CustomError implements ExceptionFilter {
     });
   }
 }
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalFilters(new CustomError());
-  await app.listen(3000);
-}
-bootstrap();
