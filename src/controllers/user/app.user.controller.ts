@@ -19,8 +19,11 @@ export class AppControllerUser {
   @Post('')
   async postUserController(@Req() req: Request, @Res() res: Response) {
     const { body } = req;
+
     const newUser = await this.appServiceUser.postUserService(body);
+
     const { password, ...userNotPassword } = newUser;
+
     return res.status(201).json({ ...userNotPassword });
   }
 
@@ -30,7 +33,6 @@ export class AppControllerUser {
     @Param('id') id: string,
     @Res() res: Response,
   ) {
-    console.log(user_info);
     const user = await this.appServiceUser.getUserService(id);
     return res.status(200).json(user);
   }
@@ -42,8 +44,11 @@ export class AppControllerUser {
     @Res() res: Response,
   ) {
     const { body } = req;
+
     const updatedUser = await this.appServiceUser.patchUserService(id, body);
+
     const { password, ...userNotPassword } = updatedUser;
+
     return res.status(200).json({ ...userNotPassword });
   }
 
