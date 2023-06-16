@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import { Error } from 'src/providers/errors/error';
 
 @Injectable()
-export class CustomMiddleware implements NestMiddleware {
+export class TokenVerifyMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const token = req.headers.authorization;
     const selectToken = token.split(' ');
@@ -13,7 +13,7 @@ export class CustomMiddleware implements NestMiddleware {
       process.env.SECRET_KEY,
       (error, decoded: any) => {
         if (error) {
-          throw new Error('Forbidden', HttpStatus.FORBIDDEN);
+          throw new Error('Invalid token', HttpStatus.UNAUTHORIZED);
         }
         req.user = {
           id: decoded.sub,
