@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { AppServiceUser } from '../../services/user/app.user.service';
 import { Request, Response } from 'express';
-
 @Controller('user')
 export class AppControllerUser {
   constructor(private readonly appServiceUser: AppServiceUser) {}
@@ -34,7 +33,8 @@ export class AppControllerUser {
     @Res() res: Response,
   ) {
     const user = await this.appServiceUser.getUserService(id);
-    return res.status(200).json(user);
+    const { password, ...userNotPassword } = user;
+    return res.status(200).json({ ...userNotPassword });
   }
 
   @Patch(':id')
