@@ -9,8 +9,10 @@ import {
   Res,
   Query,
 } from '@nestjs/common';
-import { AppServiceUser } from '../../providers/services/user/app.user.service';
+
 import { Request, Response } from 'express';
+
+import { AppServiceUser } from '../../providers/services/user/app.user.service';
 @Controller('user')
 export class AppControllerUser {
   constructor(private readonly appServiceUser: AppServiceUser) {}

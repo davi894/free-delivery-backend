@@ -4,12 +4,14 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
+
 import { AppControllerUser } from './controllers/user/app.user.controller';
-import { PrismaService } from 'src/providers/services/prisma/app.prisma.service';
-import { LoginModule } from './modules/login/login.module';
+
 import { CustomError } from './providers/errors/error';
 import { CustomMiddleware } from './providers/middlewares/middleware.verify.token';
+
 import { UserModule } from './modules/user/user.module';
+import { LoginModule } from './modules/login/login.module';
 
 @Module({
   imports: [UserModule, LoginModule],
