@@ -5,16 +5,15 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { AppControllerUser } from './controllers/user/app.user.controller';
-import { AppServiceUser } from './services/user/app.user.service';
-import { PrismaService } from 'src/services/prisma/app.prisma.service';
+import { PrismaService } from 'src/providers/services/prisma/app.prisma.service';
 import { LoginModule } from './modules/login/login.module';
-import { CustomError } from './errors/error';
-import { CustomMiddleware } from './middlewares/middleware.verify.token';
+import { CustomError } from './providers/errors/error';
+import { CustomMiddleware } from './providers/middlewares/middleware.verify.token';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [LoginModule],
-  controllers: [AppControllerUser],
-  providers: [AppServiceUser, PrismaService, CustomError, CustomMiddleware],
+  imports: [UserModule, LoginModule],
+  providers: [CustomError, CustomMiddleware],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

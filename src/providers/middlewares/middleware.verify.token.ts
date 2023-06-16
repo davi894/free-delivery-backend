@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { Error } from 'src/errors/error';
+import { Error } from 'src/providers/errors/error';
 
 @Injectable()
 export class CustomMiddleware implements NestMiddleware {

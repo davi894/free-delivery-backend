@@ -8,11 +8,11 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { AppServiceAddress } from '../../services/address/app.address.service';
+import { AppServiceAddress } from '../../providers/services/address/app.address.service';
 
 @Controller('address')
 export class AppControlerAddress {
-  constructor(private readonly appServiceAddress: AppServiceAddress) {}
+  constructor(private readonly appServiceAddress: AppServiceAddress) { }
 
   @Post('')
   async postAddressControler(@Req() req: Request, @Res() res: Response) {

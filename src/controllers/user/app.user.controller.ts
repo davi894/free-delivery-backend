@@ -9,7 +9,7 @@ import {
   Res,
   Query,
 } from '@nestjs/common';
-import { AppServiceUser } from '../../services/user/app.user.service';
+import { AppServiceUser } from '../../providers/services/user/app.user.service';
 import { Request, Response } from 'express';
 @Controller('user')
 export class AppControllerUser {
