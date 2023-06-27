@@ -12,9 +12,10 @@ import { TokenVerifyMiddleware } from './providers/middlewares/middleware.verify
 
 import { UserModule } from './modules/user/user.module';
 import { LoginModule } from './modules/login/login.module';
+import { AddressModule } from './modules/address/address.module';
 
 @Module({
-  imports: [UserModule, LoginModule],
+  imports: [UserModule, LoginModule, AddressModule],
   providers: [CustomError, TokenVerifyMiddleware],
 })
 export class AppModule implements NestModule {

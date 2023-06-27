@@ -11,8 +11,8 @@ import {
 import { AppServiceAddress } from '../../providers/services/address/app.address.service';
 
 @Controller('address')
-export class AppControlerAddress {
-  constructor(private readonly appServiceAddress: AppServiceAddress) { }
+export class AppControllerAddress {
+  constructor(private readonly appServiceAddress: AppServiceAddress) {}
 
   @Post('')
   async postAddressControler(@Req() req: Request, @Res() res: Response) {
