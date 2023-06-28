@@ -15,7 +15,10 @@ export class AppServiceAddress {
     return this.prisma.address.findUnique({ where: { id } });
   }
 
-  async patchAddressService(id: string, data: Prisma.AddressUpdateInput): Promise<Address | null> {
+  async patchAddressService(
+    id: string,
+    data: Prisma.AddressUpdateInput,
+  ): Promise<Address | null> {
     return this.prisma.address.update({ where: { id }, data });
   }
 
