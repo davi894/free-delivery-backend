@@ -29,11 +29,19 @@ model Items {
 }
 
 model Address {
-  id        String  @id @default(uuid())
-  orderId   String  @unique
-  order     Order   @relation(fields: [orderId], references: [id])
-  user      User?   @relation(fields: [userId], references: [id])
-  userId    String?
+  id          String  @id @default(uuid())
+  street      String
+  number      String
+  city        String
+  state       String
+  postalCode  String
+  country     String
+  latitude    Float?
+  longitude   Float?
+  orderId     String  @unique
+  order       Order   @relation(fields: [orderId], references: [id])
+  user        User?   @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model Order {
