@@ -23,6 +23,6 @@ export class AppModule implements NestModule {
     consumer
       .apply(TokenVerifyMiddleware)
       .exclude({ path: 'user', method: RequestMethod.POST })
-      .forRoutes(AppControllerUser);
+      .forRoutes(AppControllerUser, AddressModule);
   }
 }

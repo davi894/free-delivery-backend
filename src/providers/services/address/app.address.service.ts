@@ -11,8 +11,8 @@ export class AppServiceAddress {
     return this.prisma.address.create({ data });
   }
 
-  async getAddressService(id: string): Promise<Address | null> {
-    return this.prisma.address.findUnique({ where: { id } });
+  async getAddressService(userId: string): Promise<Address[] | null> {
+    return this.prisma.address.findMany({ where: { userId } });
   }
 
   async patchAddressService(
