@@ -14,8 +14,8 @@ model User {
   email               String     @unique
   contractor          Boolean
   courier             Boolean
-  feedbackReceiver    FeedBack[] @relation("receiverId")
-  feedbackSender      FeedBack[] @relation("senderId")
+  feedbackReceiver    Feedback[] @relation("receiverId")
+  feedbackSender      Feedback[] @relation("senderId")
   address             Address[]
   ordersAsContractor  Order[]    @relation("Contractor")
   ordersAsCourier     Order[]    @relation("Courier")
@@ -55,7 +55,7 @@ model Order {
   courierId    String?
 }
 
-model FeedBack {
+model Feedback {
   id         String  @id @default(uuid())
   comment    String
   sender     User    @relation("senderId", fields: [senderId], references: [id])

@@ -3,4 +3,4 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/providers/services/prisma/app.prisma.service';
 
 @Injectable()
-export class AppServiceItems {}
+export class AppServiceFeedback {}
