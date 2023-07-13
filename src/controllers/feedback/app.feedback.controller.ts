@@ -15,4 +15,24 @@ import { AppServiceFeedback } from '../../providers/services/feedback/app.feedba
 @Controller('feedback')
 export class AppControllerFeedback {
   constructor(private readonly appServiceFeedBack: AppServiceFeedback) {}
+
+  @Post('')
+  async postFeedbackController() {
+    return '';
+  }
+
+  @Get('')
+  async getFeedBAckController() {
+    return '';
+  }
+
+  @Patch('')
+  async patchFeedbackController() {
+    return '';
+  }
+
+  @Delete('')
+  async deleteFeedbackController() {
+    return '';
+  }
 }

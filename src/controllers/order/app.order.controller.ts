@@ -15,4 +15,24 @@ import { AppServiceOrder } from '../../providers/services/order/app.order.servic
 @Controller('order')
 export class AppControllerOrder {
   constructor(private readonly appServiceOrder: AppServiceOrder) {}
+
+  @Post('')
+  async postOrderController() {
+    return '';
+  }
+
+  @Get('')
+  async getOrderController() {
+    return '';
+  }
+
+  @Patch('')
+  async patchOrderController() {
+    return '';
+  }
+
+  @Delete('')
+  async deletetOrderController() {
+    return '';
+  }
 }

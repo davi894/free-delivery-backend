@@ -15,4 +15,24 @@ import { AppServiceItems } from '../../providers/services/items/app.items.servic
 @Controller('items')
 export class AppControllerItem {
   constructor(private readonly appServiceItems: AppServiceItems) {}
+
+  @Post('')
+  async postItemController() {
+    return '';
+  }
+
+  @Get('')
+  async getItemController() {
+    return '';
+  }
+
+  @Patch('')
+  async patchItemController() {
+    return '';
+  }
+
+  @Delete('')
+  async deleteItemController() {
+    return '';
+  }
 }
